@@ -36,6 +36,10 @@ public class ModelResources {
 	@Column(name = "surname")
 	private String surname;
 	
+	@Column(name = "assigned")
+	private int assigned;
+
+
 	@Column(name = "type")
 	private String type;
 	
@@ -103,6 +107,17 @@ public class ModelResources {
 
 
 
+
+	public int getAssigned()
+	{
+		return assigned;
+	}
+
+
+	public void setAssigned(int assigned)
+	{
+		this.assigned = assigned;
+	}
 
 
 	public void setHire(Date hire) {

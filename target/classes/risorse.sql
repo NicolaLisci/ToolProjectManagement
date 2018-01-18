@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `risorse` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `risorse`;
 -- phpMyAdmin SQL Dump
 -- version 4.7.3
 -- https://www.phpmyadmin.net/
@@ -69,18 +71,19 @@ CREATE TABLE `resources` (
   `hire` datetime DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL
+  `type` varchar(255) DEFAULT NULL,
+  `assigned` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `resources`
 --
 
-INSERT INTO `resources` (`id`, `hire`, `name`, `surname`, `type`) VALUES
-(1, '2018-01-17 16:34:55', 'Mauro', 'Caredda', 'junior'),
-(2, '2018-01-07 16:34:55', 'Lucia', 'Boi', 'junior'),
-(3, '2016-01-07 16:34:55', 'Marco', 'Brisu', 'senior'),
-(4, '2016-01-07 16:34:55', 'Stefania', 'Deidda', 'senior');
+INSERT INTO `resources` (`id`, `hire`, `name`, `surname`, `type`,`assigned`) VALUES
+(1, '2018-01-17 16:34:55', 'Mauro', 'Caredda', 'junior',0),
+(2, '2018-01-07 16:34:55', 'Lucia', 'Boi', 'junior',0),
+(3, '2016-01-07 16:34:55', 'Marco', 'Brisu', 'senior',0),
+(4, '2016-01-07 16:34:55', 'Stefania', 'Deidda', 'senior',0);
 
 --
 -- Indici per le tabelle scaricate

@@ -175,7 +175,22 @@ public class ControllerRest
 		return jpaProject.findAllById(id);
 
 	}
+	
+	//UPDATE ASSIGNED BY ID
+    @PutMapping("/assigned/project/{id}")
+    public ResponseEntity<ModelResources> assignedProject(@PathVariable(value = "id") int idAssigned, 
+                                          @Valid @RequestBody ModelResources assignedDetails) {
+      ModelResources assigned = jpaResources.findOne(idAssigned);
+        if(assigned == null) {
+            return ResponseEntity.notFound().build();
+        }
+            
+        assigned.setAssigned(assignedDetails.getAssigned());
 
+        ModelResources updateAssigned = jpaResources.save(assigned);
+        return ResponseEntity.ok(updateAssigned);
+    }
+    
 	// RESOURCES ID + PROJECT ID
 	@GetMapping(value = "/show/resources/data/{id}")
 	public String selectbyData(@PathVariable int id)

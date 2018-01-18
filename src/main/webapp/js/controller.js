@@ -75,13 +75,21 @@ angular.module('controller', [])
             })
     }
 
+    $http.get('/rest/resources/show')
+        .success(function(data) {
+            $scope.resource = data;
+        })
+        .error(function(err) {
+            $log.error(err);
+        })
+
 
     //_____________________________________________________________________________
 
 
     $scope.assignR = function($rid,$pid) {
         console.error();
-        $http.post('/rest/resources/load/employement/all', { 'id_r': $rid, 'id_p': $pid })
+        $http.put('/rest/resources/assigned/project/'+$rid, { 'assigned': $pid })
             .success(function(data) {
                 $scope.notification.success = true;
                 $scope.notification.message = "Assegnazione effettuata!";
