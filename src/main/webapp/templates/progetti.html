@@ -75,8 +75,7 @@
 	 		<th>Nome</th><th>Inizio</th><th>Scadenza</th> <th>Stato</th> <th style="text-align:center;" >Senior</th> <th style="text-align:center;">Junior</th><th style="text-align:center;">Assegna Risorse</th><th style="width: 100px;">Rimuovi</th>
 	 	</tr>
 	 	<tr ng-repeat="el in project | filter: query track by $index">
-	 		<td><a href="#/riepilogo/?id={{el.id}}" class="btn btn-link" role="button">{{ el.name_project }}</a></td>
-			<td>{{ el.start_project }}</td><td>{{ el.deadline }}</td><td>{{ el.status}}</td><td style="text-align:center;">{{ el.nsenior}}</td><td style="text-align:center;">{{ el.njunior }}</td>
+	 		<td>{{ el.name_project }}</td><td>{{ el.start_project }}</td><td>{{ el.deadline }}</td><td>{{ el.status}}</td><td style="text-align:center;">{{ el.nsenior}}</td><td style="text-align:center;">{{ el.njunior }}</td>
 	 		<td>
 				<center>
 					<div class="btn-group">
