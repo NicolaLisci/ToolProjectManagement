@@ -1,0 +1,27 @@
+<div class="container">
+
+	<div class="alert alert-success" role="alert" ng-if="notification.success">{{ notification.message }}</div>
+	<div class="alert alert-error" role="alert" ng-if="notification.error">{{ notification.message }}</div>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Nome</th><th>Inizio</th><th>Scadenza</th> <th>Stato</th> <th style="text-align:center;" >Senior</th> <th style="text-align:center;">Junior</th><th style="text-align:center;">Assegna Risorse</th><th style="width: 100px;">Rimuovi</th>
+    </tr>
+    <tr ng-repeat="el in project | filter: query track by $index">
+      <td><a href="/js/riepilogo.php?{el.id}}" class="btn btn-link" role="button">{{ el.name_project }}</a></td>
+      <td>{{ el.start_project }}</td><td>{{ el.deadline }}</td><td>{{ el.status}}</td><td style="text-align:center;">{{ el.nsenior}}</td><td style="text-align:center;">{{ el.njunior }}</td>
+      <td>
+        <center>
+          <div class="btn-group">
+          <button class="btn btn-primary" ng-click="assignR(el.name_project)"><span class="glyphicon glyphicon-user"></span></button>
+          </div>
+          <center>
+      </td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-warning" ng-click="editData(el)"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button class="btn btn-danger" ng-click="removeDataP(el.id)"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+      </td>
+    </tr>
+  </table>

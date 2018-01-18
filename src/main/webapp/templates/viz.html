@@ -1,0 +1,68 @@
+<div class="container">
+
+	<div class="alert alert-success" role="alert" ng-if="notification.success">{{ notification.message }}</div>
+	<div class="alert alert-error" role="alert" ng-if="notification.error">{{ notification.message }}</div>
+
+	<button class="btn btn-primary" ng-click="frmToggle()">Aggiungi Progetto</button>
+
+	<form class="form-horizontal" id="blogForm" ng-submit="pushDataP(frm)" hidden>
+		<div class="form-group">
+			<label for="name_project" class="col-sm-2 control-label">Nome</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="frm.name_project" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="start_project" class="col-sm-2 control-label">Inizio</label>
+			<div class="col-sm-10">
+
+
+					<div class="input-group date">
+						<input type="text" class="form-control" ng-model="frm.start_project">
+						<span class="input-group-addon">
+						<i class="glyphicon glyphicon-th"></i>
+						</span>
+
+
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="deadline" class="col-sm-2 control-label">Termine</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="frm.deadline" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="status" class="col-sm-2 control-label">Stato</label>
+			<div class="col-sm-10">
+				<select class="form-control" ng-model="frm.status" rows="8" class="form-control">
+					<option value="Evaluation">Evaluation</option>
+					<option value="Design">Design</option>
+					<option value="Development">Development</option>
+					<option value="Delivery">Delivery</option>
+					<option value="Closing">Closing</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="nsenior" class="col-sm-2 control-label">Risorse Senior</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="frm.nsenior" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="njunior" class="col-sm-2 control-label">Risorse Junior</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="frm.njunior" class="form-control">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" value="submit" class="btn btn-primary">Aggiungi Progetto</button>
+			</div>
+		</div>
+	</form>
+
+</div>
