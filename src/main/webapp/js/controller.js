@@ -208,7 +208,7 @@ angular.module('controller', [])
     $scope.removeDataR = function($params) {
         var cnfrm = confirm("Sicuro di voler cancellare?");
         if (cnfrm) {
-            $http.post('/delete/resources/{'+$params+'}', { 'id': $params })
+            $http.post('/rest/resources/delete/resources/'+$params)
                 .success(function(data) {
                     $scope.notification.success = true;
                     $scope.notification.message = "Risorsa eliminata!";

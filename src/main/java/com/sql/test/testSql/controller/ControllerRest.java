@@ -88,9 +88,8 @@ public class ControllerRest{
 	
 	//DELETE METHOD for RESOURCES
     @RequestMapping(value = "/delete/resources/{id}")
-    public String deleteResource(@PathVariable Integer id) {
+    public void deleteResource(@PathVariable Integer id) {
       jpaResources.delete(id);
-      return "Resource with " + id + " deleted";
     }
 	
 	
@@ -141,9 +140,8 @@ public class ControllerRest{
 	
 	//DELETE METHOD for PROJECT
 	@RequestMapping(value = "/delete/projects/{id}")
-	public String delete(@PathVariable Integer id) {
+	public void delete(@PathVariable Integer id) {
 		jpaProject.delete(id);
-		return "Project with " + id + " deleted";
 	}
 	
 	
