@@ -104,7 +104,7 @@ angular.module('controller', [])
     $scope.removeDataP = function($params) {
         var cnfrm = confirm("Sicuro di voler cancellare?");
         if (cnfrm) {
-            $http.post('/delete/projects/'+$params, { 'id': $params })
+            $http.post('/rest/resources/delete/projects/'+$params)
                 .success(function(data) {
                     $scope.notification.success = true;
                     $scope.notification.message = "Progetto eliminato!";
@@ -208,7 +208,7 @@ angular.module('controller', [])
     $scope.removeDataR = function($params) {
         var cnfrm = confirm("Sicuro di voler cancellare?");
         if (cnfrm) {
-            $http.post('./js/removeDataR.php', { 'id': $params })
+            $http.post('/delete/resources/{'+$params+'}', { 'id': $params })
                 .success(function(data) {
                     $scope.notification.success = true;
                     $scope.notification.message = "Risorsa eliminata!";

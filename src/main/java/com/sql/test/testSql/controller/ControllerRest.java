@@ -86,6 +86,13 @@ public class ControllerRest{
 		return new ResponseEntity<>(jpaEmplo.save(emplo), HttpStatus.CREATED);
 	}
 	
+	//DELETE METHOD for RESOURCES
+    @RequestMapping(value = "/delete/resources/{id}")
+    public String deleteResource(@PathVariable Integer id) {
+      jpaResources.delete(id);
+      return "Resource with " + id + " deleted";
+    }
+	
 	
 	//DELETE ASSIGNMENT PROJECT BY ID
 	@RequestMapping(value = "/delete/resources_assignment/{id}", method = RequestMethod.DELETE)
