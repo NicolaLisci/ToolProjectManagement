@@ -71,8 +71,9 @@
 	<br>
 
 
-	<table class="table table-striped" >
-		<tr>
+	<table class="table table-hover">
+		<thead>
+		<tr class="active">
 			<!-- colonna vuota per l'icona-->
 			<th></th>
 			<th>Nome</th>
@@ -85,8 +86,9 @@
 			<th style="width: 100px;">Rimuovi</th>
 		</tr>
 		<!-- prova uno due-->
-
+	</thead>
 		<tbody ng-repeat="el in project track by el.id">
+			<tr class="active">
 			<td><button class="btn btn-default" style="border-width:0px;" ng-click="editData(el)"><span class="glyphicon glyphicon-th-list"></span></button>	</td>
 			<td>{{ el.name_project }}</td>
 			<td>{{ el.start_project }}</td>
@@ -108,13 +110,14 @@
 							<button class="btn btn-danger" ng-click="removeDataP(el.id)"><span class="glyphicon glyphicon-remove"></span></button>
 						</div>
 					</td>
-					<tr ng-if="toggle[$index]">
+					<tr ng-if="toggle[$index]" class="active">
 						<td colspan="9">
 							<!-- risorse a scomparsa -->
 						<div class="modal-body">
 							<form class="form-horizontal" id="blogForm1">
 
-								<table class="table table-striped">
+								<table class="table table-hover">
+									<thead>
 									<tr>
 										<!--vuoto -->
 										<th></th>
@@ -125,7 +128,9 @@
 										<th >Data Assunzione</th>
 										<th>Assegnazione</th>
 									</tr>
-									<tr ng-repeat="el1 in resource | orderBy:'type'">
+								</thead>
+									<tbody ng-repeat="el1 in resource | orderBy:'type'">
+										<tr class="active">
 										<td></td>
 										<td>{{ el1.surname }}</td>
 										<td>{{ el1.name }}</td>
@@ -140,18 +145,19 @@
 										<!--		ICONE PER L'ASSEGNAZIONE |	Più			glyphicon glyphicon-plus-sign |	Meno		glyphicon glyphicon-minus-sign		-->
 										<td>
 											<button name="Aggiungi" type="button" ng-click="assignR(el1.id,el.id)" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
-												<span class="glyphicon glyphicon-plus-sign"></span></button>
+												<span class="glyphicon glyphicon-plus-sign"></span>
+											</button>
 											</td>
 										</tr>
+									</tr>
+								</tr>
+									</tbody>
+									</form>
 									</div>
-								</form>
-
-
+									</td>
 							</tr>
-						</table>
 					</tbody>
-				</td>
-
+				</table>
 
 				<!-- Button trigger modal -->
 				<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel">
