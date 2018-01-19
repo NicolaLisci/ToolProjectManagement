@@ -105,10 +105,10 @@
 
 														<table class="table table-striped">
 															<tr>
-																<th>Cognome</th><th>Nome</th><th>Tipo</th><th>Assegna</th>
+																<th>Cognome</th><th>Nome</th><th>Tipo</th><th>Progetto</th><th>Data Assunzione</th><th>Assegna</th>
 															</tr>
 															<tr ng-repeat="el1 in resource | filter: query track by $index">
-																<td>{{ el1.surname }}</td><td>{{ el1.name }}</td><td>{{ el1.type}}</td>
+																<td>{{ el1.surname }}</td><td>{{ el1.name }}</td><td>{{ el1.type}}</td><td>{{ el1.assigned}}</td><td>{{ el1.hire}}</td>
 																<td>
 																	<button name="Aggiungi" type="button" ng-click="assignR(el1.id,el.id)" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
 																		<span class="glyphicon glyphicon-ok"></span></button>
