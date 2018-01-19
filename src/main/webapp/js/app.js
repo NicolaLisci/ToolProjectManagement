@@ -13,6 +13,11 @@ angular.module('app', ['ngRoute', 'controller'])
 		templateUrl: 'templates/progetti_test.html',
 		controller: 'BlogCtrl'
 	})
+	.when('/progetto', {
+		templateUrl: 'templates/progetto.html',
+		controller: 'RPCtrl'
+	})
+
 	.otherwise({
 		templateUrl: 'templates/404.html'
 	})

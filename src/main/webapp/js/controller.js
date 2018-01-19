@@ -239,3 +239,65 @@ angular.module('controller', [])
     }
 
     }])
+
+    //_________________________________________________________________________________________________
+    //Controller per la pagina progetto.html
+
+    .controller('RPCtrl', ['$scope', '$http', '$log', '$timeout', function($scope, $http, $log, $timeout) {
+        $scope.frm = {};
+        $scope.notification = {};
+
+        $scope.frmToggle = function() {
+            $('#blogForm').slideToggle();
+        }
+
+        $http.get('/rest/resources/show/projects')
+            .success(function(data) {
+                $scope.project = data;
+            })
+            .error(function(err) {
+                $log.error(err);
+            })
+        $http.get('/rest/resources/show')
+              .success(function(data) {
+                  $scope.resource = data;
+              })
+              .error(function(err) {
+                  $log.error(err);
+              })
+
+        $scope.editData = function($blog) {
+            $scope.editBlogData = $blog;
+            $('#edit-modal').modal('show');
+        }
+
+        $scope.assegnaR = function($params,$zero) {
+          console.log($params);
+          console.log($zero);
+            $('#edit-modal').modal('hide');
+            $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
+        'type':$params.type, 'hire':$params.hire, 'assigned':$zero})
+                .success(function(data) {
+                    $scope.notification.success = true;
+                    $scope.notification.message = "Risorsa modificata!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $scope.blogs = data;
+                    $scope.frm = $scope.uppdateDataR = {};
+                })
+                .error(function(err) {
+                    $scope.notification.error = true;
+                    $scope.notification.message = "Impossibile modificare la risorsa!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $log.error(err);
+                })
+        }
+
+
+
+
+
+    }])

@@ -102,6 +102,7 @@ public class ControllerRest
 		res.setSurname(resourcesDetails.getSurname());
 		res.setType(resourcesDetails.getType());
 		res.setHire(resourcesDetails.getHire());
+		res.setAssigned(resourcesDetails.getAssigned());
 
 		ModelResources updateRes = jpaResources.save(res);
 		return ResponseEntity.ok(updateRes);
