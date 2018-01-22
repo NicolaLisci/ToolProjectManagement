@@ -149,7 +149,7 @@ angular.module('controller', [])
         $('#blogForm').slideToggle();
     }
 
-    $http.get('/rest/resources/show')
+    $http.get('/rest/resources/show/projects')
         .success(function(data) {
             $scope.resource = data;
         })
@@ -243,21 +243,26 @@ angular.module('controller', [])
     //_________________________________________________________________________________________________
     //Controller per la pagina progetto.html
 
-    .controller('RPCtrl', ['$scope', '$http', '$log', '$timeout', function($scope, $http, $log, $timeout) {
+    .controller('RPCtrl', ['$scope', '$http', '$log', '$timeout','$routeParams', function($scope, $http, $log, $timeout, $routeParams) {
         $scope.frm = {};
         $scope.notification = {};
-
+        var idP = $routeParams.id;
+        console.log(idP);
         $scope.frmToggle = function() {
             $('#blogForm').slideToggle();
         }
+//+$routeParams.id
 
-        $http.get('/rest/resources/show/projects')
-            .success(function(data) {
-                $scope.project = data;
-            })
-            .error(function(err) {
-                $log.error(err);
-            })
+            $http.get('/rest/resources/show/projects/'+idP)
+          //  console.log($scope.project);
+                .success(function(data) {
+                    $scope.project = data;
+                    console.log(data);
+                })
+                .error(function(err) {
+                    $log.error(err);
+                })
+
         $http.get('/rest/resources/show')
               .success(function(data) {
                   $scope.resource = data;
@@ -271,9 +276,8 @@ angular.module('controller', [])
             $('#edit-modal').modal('show');
         }
 
-        $scope.assegnaR = function($params,$zero) {
-          console.log($params);
-          console.log($zero);
+        $scope.rimuoviR = function($params,$zero) {
+
             $('#edit-modal').modal('hide');
             $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
         'type':$params.type, 'hire':$params.hire, 'assigned':$zero})
@@ -296,6 +300,28 @@ angular.module('controller', [])
                 })
         }
 
+        $scope.assegnaR = function($params,$id) {
+            $('#edit-modal').modal('hide');
+            $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
+        'type':$params.type, 'hire':$params.hire, 'assigned':$id})
+                .success(function(data) {
+                    $scope.notification.success = true;
+                    $scope.notification.message = "Risorsa modificata!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $scope.blogs = data;
+                    $scope.frm = $scope.uppdateDataR = {};
+                })
+                .error(function(err) {
+                    $scope.notification.error = true;
+                    $scope.notification.message = "Impossibile modificare la risorsa!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $log.error(err);
+                })
+        }
 
 
 

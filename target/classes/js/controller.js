@@ -271,7 +271,7 @@ angular.module('controller', [])
             $('#edit-modal').modal('show');
         }
 
-        $scope.updateDataR = function($params,$zero) {
+        $scope.rimuoviR = function($params,$zero) {
           console.log($params);
           console.log($zero);
             $('#edit-modal').modal('hide');
@@ -296,6 +296,30 @@ angular.module('controller', [])
                 })
         }
 
+        $scope.assegnaR = function($params,$id) {
+          console.log($params);
+          console.log($id);
+            $('#edit-modal').modal('hide');
+            $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
+        'type':$params.type, 'hire':$params.hire, 'assigned':$id})
+                .success(function(data) {
+                    $scope.notification.success = true;
+                    $scope.notification.message = "Risorsa modificata!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $scope.blogs = data;
+                    $scope.frm = $scope.uppdateDataR = {};
+                })
+                .error(function(err) {
+                    $scope.notification.error = true;
+                    $scope.notification.message = "Impossibile modificare la risorsa!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $log.error(err);
+                })
+        }
 
 
 

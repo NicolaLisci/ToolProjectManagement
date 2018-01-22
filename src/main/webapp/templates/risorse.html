@@ -56,14 +56,11 @@
 
 
 
-	<table class="table table-hover">
-		<thead>
-	 	<tr class="active">
+	<table class="table table-striped">
+	 	<tr>
 	 		<th>Cognome</th><th>Nome</th><th>Tipo</th> <th>Data Assunzione</th><th style="width: 100px;">Rimuovi</th>
 	 	</tr>
-	</thead>
-	<tbody>
-	 	<tr class="active" ng-repeat="el in resource | filter: query track by $index">
+	 	<tr ng-repeat="el in resource | filter: query track by $index">
 	 		<td>{{ el.surname }}</td><td>{{ el.name }}</td><td>{{ el.type}}</td><td>{{ el.hire}}</td>
 	 		<td>
 	 			<div class="btn-group">
@@ -72,7 +69,6 @@
 	 			</div>
 	 		</td>
 	 	</tr>
-	</tbody>
 	</table>
 	<!-- Button trigger modal -->
 
