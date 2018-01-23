@@ -149,7 +149,7 @@ angular.module('controller', [])
         $('#blogForm').slideToggle();
     }
 
-    $http.get('/rest/resources/show/projects')
+    $http.get('/rest/resources/show/')
         .success(function(data) {
             $scope.resource = data;
         })
@@ -247,17 +247,23 @@ angular.module('controller', [])
         $scope.frm = {};
         $scope.notification = {};
         var idP = $routeParams.id;
-        console.log(idP);
+      //  var $nJ=0;
+      //  var $nS=0;
+        //console.log(nJ);
+        //console.log(nS);
+        //console.log(idP);
         $scope.frmToggle = function() {
             $('#blogForm').slideToggle();
         }
-//+$routeParams.id
+
 
             $http.get('/rest/resources/show/projects/'+idP)
-          //  console.log($scope.project);
                 .success(function(data) {
                     $scope.project = data;
-                    console.log(data);
+                  $nJ = $scope.project.nJ;
+                  $nS = $scope.project.nS;
+                    //console.log("nJ iniziale: " + $nJ);
+                    //console.log("nS iniziale: "+ $nS);
                 })
                 .error(function(err) {
                     $log.error(err);
@@ -279,6 +285,27 @@ angular.module('controller', [])
         $scope.rimuoviR = function($params,$zero) {
 
             $('#edit-modal').modal('hide');
+            console.log($params.type);
+            if ($params.type == "junior" && $scope.project.njunior !=0)
+            {
+              $nJ=$nJ-1;
+              console.log("Rimosso junior");
+              console.log("nJ successivo: "+ $nJ);
+              console.log("nS successivo: "+ $nS);
+            }else
+            {
+              if ($params.type == "senior" && $scope.project.nsenior !=0)
+              {
+                console.log("Junior è zero");
+                $nS=$nS-1;
+                console.log("Rimosso senior");
+                console.log("nJ successivo: "+ $nJ);
+                console.log("nS successivo: "+ $nS);
+              }else
+              {
+                console.log("Senior è zero");
+            }
+          }
             $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
         'type':$params.type, 'hire':$params.hire, 'assigned':$zero})
                 .success(function(data) {
@@ -302,6 +329,19 @@ angular.module('controller', [])
 
         $scope.assegnaR = function($params,$id) {
             $('#edit-modal').modal('hide');
+              console.log($params.type);
+            if ($params.type == "junior")
+            {
+              $nJ=$nJ+1;
+              console.log("Aggiunto junior");
+              console.log("nJ successivo: "+ $nJ);
+              console.log("nS successivo: "+ $nS);
+            }else {
+              $nS=$nS+1;
+              console.log("Aggiunto senior");
+              console.log("nJ successivo: "+ $nJ);
+              console.log("nS successivo: "+ $nS);
+            }
             $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
         'type':$params.type, 'hire':$params.hire, 'assigned':$id})
                 .success(function(data) {
@@ -322,6 +362,37 @@ angular.module('controller', [])
                     $log.error(err);
                 })
         }
+
+    //    'nJ':$params.nJ,'nS':$params.nS
+
+        $scope.updateDataP = function($params) {
+          $('#edit-modal').modal('hide');
+
+            $http.put('/rest/resources/update/project/'+$params.id, {'id': $params.id, 'name_project': $params.name_project, 'start_project': $params.start_project,
+          'deadline':$params.deadline, 'status':$params.status,'nsenior':$params.nsenior,'njunior':$params.njunior,'nJ':$nJ,'nS':$nS })
+                .success(function(data) {
+                  console.log("fine: "+$nJ);
+                  console.log("fine: "+$nS);
+                  console.log(data);
+                    $scope.notification.success = true;
+                    $scope.notification.message = "Progetto aggiornato!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $scope.blogs = data;
+                    $scope.frm = $scope.editBlogData = {};
+                })
+                .error(function(err) {
+                    $scope.notification.error = true;
+                    $scope.notification.message = "Impossibile aggiornare il progetto!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $log.error(err);
+                })
+        }
+
+
 
 
 

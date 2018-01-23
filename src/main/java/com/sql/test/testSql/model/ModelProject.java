@@ -40,11 +40,18 @@ public class ModelProject {
 	@Column(name = "status")
 	private String status;
 	
+	
 	@Column(name = "nsenior")
-	private String nsenior;
+	private int nsenior;
 	
 	@Column(name = "njunior")
-	private String njunior;
+	private int njunior;
+	
+	@Column(name = "nJ")
+	private int nJ;
+	
+	@Column(name = "nS")
+	private int nS;
 	
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "deadline")
@@ -89,28 +96,51 @@ public class ModelProject {
 		this.status = status;
 	}
 
-	public String getNsenior() {
-		return nsenior;
-	}
-
-	public void setNsenior(String nsenior) {
-		this.nsenior = nsenior;
-	}
-
-	public String getNjunior() {
-		return njunior;
-	}
-
-	public void setNjunior(String njunior) {
-		this.njunior = njunior;
-	}
-
 	public Date getDeadline() {
 		return deadline;
 	}
 
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
+	}
+
+	public int getnJ()
+	{
+		return nJ;
+	}
+
+	public void setnJ(int nJ)
+	{
+		this.nJ = nJ;
+	}
+
+	public int getnS()
+	{
+		return nS;
+	}
+
+	public void setnS(int nS)
+	{
+		this.nS = nS;
+	}
+	public int getNsenior()
+	{
+		return nsenior;
+	}
+
+	public void setNsenior(int nsenior)
+	{
+		this.nsenior = nsenior;
+	}
+
+	public int getNjunior()
+	{
+		return njunior;
+	}
+
+	public void setNjunior(int njunior)
+	{
+		this.njunior = njunior;
 	}
 
 	

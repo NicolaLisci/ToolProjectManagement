@@ -82,7 +82,8 @@ public class ControllerRest
 		proj.setNjunior(projectDetails.getNjunior());
 		proj.setNsenior(projectDetails.getNsenior());
 		proj.setDeadline(projectDetails.getDeadline());
-
+		proj.setnJ(projectDetails.getnJ());
+		proj.setnS(projectDetails.getnS());
 		ModelProject updatedProj = jpaProject.save(proj);
 		return ResponseEntity.ok(updatedProj);
 	}

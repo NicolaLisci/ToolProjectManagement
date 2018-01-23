@@ -149,7 +149,7 @@ angular.module('controller', [])
         $('#blogForm').slideToggle();
     }
 
-    $http.get('/rest/resources/show')
+    $http.get('/rest/resources/show/')
         .success(function(data) {
             $scope.resource = data;
         })
@@ -243,21 +243,32 @@ angular.module('controller', [])
     //_________________________________________________________________________________________________
     //Controller per la pagina progetto.html
 
-    .controller('RPCtrl', ['$scope', '$http', '$log', '$timeout', function($scope, $http, $log, $timeout) {
+    .controller('RPCtrl', ['$scope', '$http', '$log', '$timeout','$routeParams', function($scope, $http, $log, $timeout, $routeParams) {
         $scope.frm = {};
         $scope.notification = {};
-
+        var idP = $routeParams.id;
+        $scope.nJ=0;
+        $scope.nS=0;
+        //console.log(nJ);
+        //console.log(nS);
+        //console.log(idP);
         $scope.frmToggle = function() {
             $('#blogForm').slideToggle();
         }
 
-        $http.get('/rest/resources/show/projects')
-            .success(function(data) {
-                $scope.project = data;
-            })
-            .error(function(err) {
-                $log.error(err);
-            })
+
+            $http.get('/rest/resources/show/projects/'+idP)
+                .success(function(data) {
+                    $scope.project = data;
+                  $nJA = parseInt($scope.project.njunior);
+                  $nSA = parseInt($scope.project.nsenior);
+                    console.log("nJ iniziale: " + $nJA);
+                    console.log("nS iniziale: "+ $nSA);
+                })
+                .error(function(err) {
+                    $log.error(err);
+                })
+
         $http.get('/rest/resources/show')
               .success(function(data) {
                   $scope.resource = data;
@@ -272,9 +283,29 @@ angular.module('controller', [])
         }
 
         $scope.rimuoviR = function($params,$zero) {
-          console.log($params);
-          console.log($zero);
+
             $('#edit-modal').modal('hide');
+            console.log($params.type);
+            if ($params.type == "junior" && $scope.project.njunior !=0)
+            {
+              $scope.nJ=$scope.nJ-1;
+              console.log("Rimosso junior");
+              console.log("nJ successivo: "+ $scope.nJ);
+              console.log("nS successivo: "+ $scope.nS);
+            }else
+            {
+              if ($params.type == "senior" && $scope.project.nsenior !=0)
+              {
+                console.log("Junior è zero");
+                $scope.nS=$scope.nS-1;
+                console.log("Rimosso senior");
+                console.log("nJ successivo: "+ $scope.nJ);
+                console.log("nS successivo: "+ $scope.nS);
+              }else
+              {
+                console.log("Senior è zero");
+            }
+          }
             $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
         'type':$params.type, 'hire':$params.hire, 'assigned':$zero})
                 .success(function(data) {
@@ -297,9 +328,20 @@ angular.module('controller', [])
         }
 
         $scope.assegnaR = function($params,$id) {
-          console.log($params);
-          console.log($id);
             $('#edit-modal').modal('hide');
+              console.log($params.type);
+            if ($params.type == "junior")
+            {
+              $scope.nJ=$scope.nJ+1;
+              console.log("Aggiunto junior");
+              console.log("nJ successivo: "+ $scope.nJ);
+              console.log("nS successivo: "+ $scope.nS);
+            }else {
+              $scope.nS=$scope.nS+1;
+              console.log("Aggiunto senior");
+              console.log("nJ successivo: "+ $scope.nJ);
+              console.log("nS successivo: "+ $scope.nS);
+            }
             $http.put('/rest/resources/update/resources/'+$params.id, {'id': $params.id, 'surname': $params.surname, 'name': $params.name,
         'type':$params.type, 'hire':$params.hire, 'assigned':$id})
                 .success(function(data) {
@@ -320,6 +362,37 @@ angular.module('controller', [])
                     $log.error(err);
                 })
         }
+
+    //    'nJ':$params.nJ,'nS':$params.nS
+
+        $scope.updateDataP = function($params) {
+          $('#edit-modal').modal('hide');
+
+            $http.put('/rest/resources/update/project/'+$params.id, {'id': $params.id, 'name_project': $params.name_project, 'start_project': $params.start_project,
+          'deadline':$params.deadline, 'status':$params.status,'nsenior':$params.nsenior,'njunior':$params.njunior,'nJ':$scope.nJ,'nS':$scope.nS })
+                .success(function(data) {
+                  console.log("scope: "+$scope.nJ);
+                  console.log("scope: "+$scope.nS);
+                  console.log(data);
+                    $scope.notification.success = true;
+                    $scope.notification.message = "Progetto aggiornato!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $scope.blogs = data;
+                    $scope.frm = $scope.editBlogData = {};
+                })
+                .error(function(err) {
+                    $scope.notification.error = true;
+                    $scope.notification.message = "Impossibile aggiornare il progetto!";
+                    $timeout(function() {
+                        $scope.notification = {};
+                    }, 3000);
+                    $log.error(err);
+                })
+        }
+
+
 
 
 

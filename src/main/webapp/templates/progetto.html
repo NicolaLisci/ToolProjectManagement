@@ -1,14 +1,14 @@
 <div class="container">
 	<div class="alert alert-success" role="alert" ng-if="notification.success">{{ notification.message }}</div>
 	<div class="alert alert-error" role="alert" ng-if="notification.error">{{ notification.message }}</div>
-	<h2>Progetti > Nome Progetto</h2>
+	<h2>Progetti >{{project.name_project}}</h2>
   <table class="table table-striped">
     <tr>
       <th>Inizio</th><th>Scadenza</th> <th>Stato</th> <th style="text-align:center;">Senior</th><th style="text-align:center;">Junior</th><th style="width: 100px;">Modifica</th>
     </tr>
-    <tbody ng-repeat="el in project |  limitTo : 1">
+    <tbody>
 			<!--<script> $id={{ el.id }}</script>-->
-      <td>{{ el.start_project }}</td><td>{{ el.deadline }}</td><td>{{ el.status}}</td><td style="text-align:center;">{{ el.nsenior}}</td><td style="text-align:center;">{{ el.njunior }}</td>
+      <td>{{ project.start_project }}</td><td>{{ project.deadline }}</td><td>{{ project.status}}</td><td style="text-align:center;">{{ project.nsenior}} {{project.nS}}</td><td style="text-align:center;">{{ project.njunior }} {{project.nJ}}</td>
       <td>
         <div class="btn-group">
           <button class="btn btn-warning" ng-click="editData(el)"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -35,7 +35,7 @@
 	 		<td>
 				<div class="btn-group">
 	 				<button class="btn btn-danger btn-circle" style=" width:20px;height:20px;padding:0;border-radius:10px;"
-					ng-click="rimuoviR(el1,0)"><span class="glyphicon glyphicon-minus"></span></button>
+					ng-click=" rimuoviR(el1,0); updateDataP(project) "><span class="glyphicon glyphicon-minus"></span></button>
 	 			</div>
 	 		</td>
 	 	</tr>
@@ -55,7 +55,7 @@
 	 		<td>
 	 			<div class="btn-group">
 					<button class="btn btn-success btn-circle" style=" width:21px;height:21px;padding: 0;border-radius:10px;"
-					ng-click="assegnaR(el,$id)"><span class="glyphicon glyphicon-plus"></span></button>
+					ng-click="assegnaR(el,$id); updateDataP(project) "><span class="glyphicon glyphicon-plus"></span></button>
 	 			</div>
 	 		</td>
 	 	</tr>

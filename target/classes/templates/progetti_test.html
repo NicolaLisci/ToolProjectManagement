@@ -87,7 +87,12 @@
 		<!-- prova uno due-->
 
 		<tbody ng-repeat="el in project track by el.id">
-			<td><button class="btn btn-default" style="border-width:0px;" ng-click="editData(el)"><span class="glyphicon glyphicon-th-list"></span></button>	</td>
+			<td><a href="#/progetto/?id={{el.id}}"
+				<button class="btn btn-default" style="border-width:0px;">
+					<span class="glyphicon glyphicon-th-list"></span>
+				</button>
+			</a>
+		</td>
 			<td>{{ el.name_project }}</td>
 			<td>{{ el.start_project }}</td>
 			<td>{{ el.deadline }}</td>
