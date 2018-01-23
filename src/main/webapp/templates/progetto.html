@@ -28,7 +28,7 @@
 			<th>Nome</th>
 			<th colspan="2">Tipo</th>
 	 	</tr>
-	 	<tr ng-repeat="el1 in resource " ng-show="el1.assigned != 0">
+	 	<tr ng-repeat="el1 in resource " ng-show="el1.assigned == project.id">
 	 		<td>{{ el1.surname }}</td>
 			<td>{{ el1.name }}</td>
 			<td>{{ el1.type}}</td>
@@ -55,7 +55,7 @@
 	 		<td>
 	 			<div class="btn-group">
 					<button class="btn btn-success btn-circle" style=" width:21px;height:21px;padding: 0;border-radius:10px;"
-					ng-click="assegnaR(el,$id); updateDataP(project) "><span class="glyphicon glyphicon-plus"></span></button>
+					ng-click="assegnaR(el,project.id); updateDataP(project) "><span class="glyphicon glyphicon-plus"></span></button>
 	 			</div>
 	 		</td>
 	 	</tr>
@@ -71,32 +71,32 @@
 				<div class="modal-content">
 						<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="edit-modalLabel">Edit Progetto ( {{ editBlogData.name_project }} )</h4>
+								<h4 class="modal-title" id="edit-modalLabel">Edit Progetto ( {{ project.name_project }} )</h4>
 						</div>
 						<div class="modal-body">
 				<form class="form-horizontal" id="blogForm">
 					<div class="form-group">
 						<label for="name_project" class="col-sm-2 control-label">Nome progetto</label>
 						<div class="col-sm-10">
-							<input type="text" ng-model="editBlogData.name_project" class="form-control">
+							<input type="text" ng-model="project.name_project" class="form-control">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="start_project" class="col-sm-2 control-label">Inizio</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" ng-model="editBlogData.start_project" rows="8"></input>
+							<input type="text" class="form-control" ng-model="project.start_project" rows="8"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="deadline" class="col-sm-2 control-label">Termine</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" ng-model="editBlogData.deadline" rows="8"></input>
+							<input type="text" class="form-control" ng-model="project.deadline" rows="8"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="status" class="col-sm-2 control-label">Stato</label>
 						<div class="col-sm-10">
-							<select class="form-control" ng-model="editBlogData.status" rows="8">
+							<select class="form-control" ng-model="project.status" rows="8">
 								<option value="Evaluation">Evaluation</option>
 								<option value="Design">Design</option>
 								<option value="Development">Development</option>
@@ -108,20 +108,20 @@
 					<div class="form-group">
 						<label for="nsenior" class="col-sm-2 control-label">Risorse Senior</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" ng-model="editBlogData.nsenior" rows="8"></input>
+							<input type="text" class="form-control" ng-model="project.nsenior" rows="8"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="njunior" class="col-sm-2 control-label">Risorse Junior</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" ng-model="editBlogData.njunior" rows="8"></input>
+							<input type="text" class="form-control" ng-model="project.njunior" rows="8"></input>
 						</div>
 					</div>
 				</form>
 						</div>
 						<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
-								<button type="button" class="btn btn-primary" ng-click="updateDataP(editBlogData)">Salva</button>
+								<button type="button" class="btn btn-primary" ng-click="updateDataP(project)">Salva</button>
 						</div>
 				</div>
 		</div>

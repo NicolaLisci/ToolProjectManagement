@@ -282,11 +282,12 @@ angular.module('controller', [])
             $('#edit-modal').modal('show');
         }
 
+
         $scope.rimuoviR = function($params,$zero) {
 
             $('#edit-modal').modal('hide');
             console.log($params.type);
-            if ($params.type == "junior" && $scope.project.njunior !=0)
+            if ($params.type == "junior" || $params.type == "Junior" && $scope.project.njunior !=0)
             {
               $nJ=$nJ-1;
               console.log("Rimosso junior");
@@ -294,7 +295,7 @@ angular.module('controller', [])
               console.log("nS successivo: "+ $nS);
             }else
             {
-              if ($params.type == "senior" && $scope.project.nsenior !=0)
+              if ($params.type == "senior" ||$params.type == "Senior" && $scope.project.nsenior !=0)
               {
                 console.log("Junior è zero");
                 $nS=$nS-1;
@@ -330,7 +331,7 @@ angular.module('controller', [])
         $scope.assegnaR = function($params,$id) {
             $('#edit-modal').modal('hide');
               console.log($params.type);
-            if ($params.type == "junior")
+            if ($params.type == "junior"||$params.type == "Junior")
             {
               $nJ=$nJ+1;
               console.log("Aggiunto junior");

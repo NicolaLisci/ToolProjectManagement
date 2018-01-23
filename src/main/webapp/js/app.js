@@ -10,7 +10,7 @@ angular.module('app', ['ngRoute', 'controller'])
 		controller: 'ResCtrl'
 	})
 	.when('/progetti', {
-		templateUrl: 'templates/progetti_test.html',
+		templateUrl: 'templates/progetti.html',
 		controller: 'BlogCtrl'
 	})
 	.when('/progetto', {

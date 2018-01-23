@@ -24,8 +24,8 @@
 			<label for="type" class="col-sm-2 control-label">Tipologia</label>
 			<div class="col-sm-10">
         <select class="form-control" ng-model="frm.type" rows="8" class="form-control">
-					<option value="junior">Junior</option>
-					<option value="senior">Senior</option>
+					<option value="Junior">Junior</option>
+					<option value="Senior">Senior</option>
 
 				</select>
 			</div>
@@ -70,8 +70,7 @@
 	 		</td>
 	 	</tr>
 	</table>
-	<!-- Button trigger modal -->
-
+	<!-- popup-->
 	<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel">
 	    <div class="modal-dialog modal-lg" role="document">
 	        <div class="modal-content">
@@ -81,13 +80,12 @@
 	            </div>
 	            <div class="modal-body">
 	             	<form class="form-horizontal" id="blogForm">
-
-            <div class="form-group">
-							<label for="surname" class="col-sm-2 control-label">Cognome</label>
-							<div class="col-sm-10">
-								<input type="text" ng-model="editBlogData.surname" class="form-control">
-							</div>
-						</div>
+									<div class="form-group">
+										<label for="surname" class="col-sm-2 control-label">Cognome</label>
+										<div class="col-sm-10">
+											<input type="text" ng-model="editBlogData.surname" class="form-control">
+										</div>
+									</div>
 
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">Nome</label>
@@ -100,8 +98,8 @@
               <label for="title" class="col-sm-2 control-label">Tipologia</label>
               <div class="col-sm-10">
                   <select class="form-control" ng-model="editBlogData.type" rows="8" class="form-control">
-                    <option value="junior">Junior</option>
-                    <option value="senior">Senior</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
 
                   </select>
                 </div>
