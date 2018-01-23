@@ -60,7 +60,7 @@
 	 	<tr>
 	 		<th>Cognome</th><th>Nome</th><th>Tipo</th> <th>Data Assunzione</th><th style="width: 100px;">Rimuovi</th>
 	 	</tr>
-	 	<tr ng-repeat="el in resource | filter: query track by $index">
+	 	<tr ng-repeat="el in resource | filter: query track by $index" class="active">
 	 		<td>{{ el.surname }}</td><td>{{ el.name }}</td><td>{{ el.type}}</td><td>{{ el.hire}}</td>
 	 		<td>
 	 			<div class="btn-group">
