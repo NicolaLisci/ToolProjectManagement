@@ -55,7 +55,7 @@ angular.module('controller', [])
     $scope.updateDataP = function($params) {
         $('#edit-modal').modal('hide');
         $http.put('/rest/resources/update/project/'+$params.id, {'id': $params.id, 'name_project': $params.name_project, 'start_project': $params.start_project,
-      'deadline':$params.deadline, 'status':$params.status,'nsenior':$params.nsenior,'njunior':$params.njunior })
+      'deadline':$params.deadline, 'status':$params.status,'nsenior':$params.nsenior,'njunior':$params.njunior})
             .success(function(data) {
                 $scope.notification.success = true;
                 $scope.notification.message = "Progetto aggiornato!";
@@ -317,6 +317,8 @@ angular.module('controller', [])
                     }, 3000);
                     $scope.blogs = data;
                     $scope.frm = $scope.uppdateDataR = {};
+                    $timeout(function(){
+                      location.reload()}, 1000);
                 })
                 .error(function(err) {
                     $scope.notification.error = true;
@@ -353,6 +355,8 @@ angular.module('controller', [])
                     }, 3000);
                     $scope.blogs = data;
                     $scope.frm = $scope.uppdateDataR = {};
+                    $timeout(function(){
+                      location.reload()}, 1000);
                 })
                 .error(function(err) {
                     $scope.notification.error = true;

@@ -1,3 +1,65 @@
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="edit-modalLabel">Edit Progetto ( {{ editBlogData.name_project }} )</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="blogForm">
+					<div class="form-group">
+						<label for="name_project" class="col-sm-2 control-label">Nome progetto</label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="editBlogData.name_project" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="start_project" class="col-sm-2 control-label">Inizio</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" ng-model="editBlogData.start_project" rows="8"></input>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="deadline" class="col-sm-2 control-label">Termine</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" ng-model="editBlogData.deadline" rows="8"></input>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="status" class="col-sm-2 control-label">Stato</label>
+						<div class="col-sm-10">
+							<select class="form-control" ng-model="editBlogData.status" rows="8">
+								<option value="Evaluation">Evaluation</option>
+								<option value="Design">Design</option>
+								<option value="Development">Development</option>
+								<option value="Delivery">Delivery</option>
+								<option value="Closing">Closing</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nsenior" class="col-sm-2 control-label">Risorse Senior</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" ng-model="editBlogData.nsenior" rows="8"></input>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="njunior" class="col-sm-2 control-label">Risorse Junior</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" ng-model="editBlogData.njunior" rows="8"></input>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+				<button type="button" class="btn btn-primary" ng-click="updateDataP(editBlogData)">Salva</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="container">
 
 	<div class="alert alert-success" role="alert" ng-if="notification.success">{{ notification.message }}</div>
@@ -88,8 +150,8 @@
 			<td>{{ el.start_project }}</td>
 			<td>{{ el.deadline }}</td>
 			<td>{{ el.status}}</td>
-			<td style="text-align:center;">{{ el.nsenior}}</td>
-			<td style="text-align:center;">{{ el.njunior }}</td>
+			<td style="text-align:center;">{{ el.nsenior}} </td>
+			<td style="text-align:center;">{{ el.njunior }} </td>
 			<td>
 				<center>
 					<a class="btn btn-link" ng-init="toggle[$index] = false" ng-click="toggle[$index] = !toggle[$index]">
@@ -110,7 +172,7 @@
 						<div class="modal-body">
 							<form class="form-horizontal" id="blogForm1">
 
-								<table class="table table-striped">
+								<table class="table table-striped" ng-show="el.nJ!=0 && el.nS!=0">
 									<tr>
 										<!--vuoto -->
 										<th></th>
@@ -145,7 +207,7 @@
 
 									</div>
 								</form>
-
+								<h4 ng-show="el.nJ==0 && el.nS==0">Nessuna risorsa assegnata al progetto</h4>
 
 							</tr>
 						</table>
@@ -154,66 +216,6 @@
 
 
 				<!-- popoup-->
-				<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel">
-					<div class="modal-dialog modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="edit-modalLabel">Edit Progetto ( {{ editBlogData.name_project }} )</h4>
-							</div>
-							<div class="modal-body">
-								<form class="form-horizontal" id="blogForm">
-									<div class="form-group">
-										<label for="name_project" class="col-sm-2 control-label">Nome progetto</label>
-										<div class="col-sm-10">
-											<input type="text" ng-model="editBlogData.name_project" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="start_project" class="col-sm-2 control-label">Inizio</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" ng-model="editBlogData.start_project" rows="8"></input>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="deadline" class="col-sm-2 control-label">Termine</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" ng-model="editBlogData.deadline" rows="8"></input>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="status" class="col-sm-2 control-label">Stato</label>
-										<div class="col-sm-10">
-											<select class="form-control" ng-model="editBlogData.status" rows="8">
-												<option value="Evaluation">Evaluation</option>
-												<option value="Design">Design</option>
-												<option value="Development">Development</option>
-												<option value="Delivery">Delivery</option>
-												<option value="Closing">Closing</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="nsenior" class="col-sm-2 control-label">Risorse Senior</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" ng-model="editBlogData.nsenior" rows="8"></input>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="njunior" class="col-sm-2 control-label">Risorse Junior</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" ng-model="editBlogData.njunior" rows="8"></input>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
-								<button type="button" class="btn btn-primary" ng-click="updateDataP(editBlogData)">Salva</button>
-							</div>
-						</div>
-					</div>
-				</div>
 
 
 

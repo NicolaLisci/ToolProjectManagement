@@ -4,11 +4,20 @@
 	<h2>Progetti >{{project.name_project}}</h2>
   <table class="table table-striped">
     <tr>
-      <th>Inizio</th><th>Scadenza</th> <th>Stato</th> <th style="text-align:center;">Senior</th><th style="text-align:center;">Junior</th><th style="width: 100px;">Modifica</th>
+      <th>Inizio</th>
+			<th>Scadenza</th>
+			<th>Stato</th>
+			<th style="text-align:center;">Senior</th>
+			<th style="text-align:center;">Junior</th>
+			<th style="width: 100px;">Modifica</th>
     </tr>
     <tbody>
 			<!--<script> $id={{ el.id }}</script>-->
-      <td>{{ project.start_project }}</td><td>{{ project.deadline }}</td><td>{{ project.status}}</td><td style="text-align:center;">{{ project.nsenior}} {{project.nS}}</td><td style="text-align:center;">{{ project.njunior }} {{project.nJ}}</td>
+      <td>{{ project.start_project }}</td>
+			<td>{{ project.deadline }}</td>
+			<td>{{ project.status}}</td>
+			<td style="text-align:center;">{{ project.nsenior}}</td>
+			<td style="text-align:center;">{{ project.njunior }}</td>
       <td>
         <div class="btn-group">
           <button class="btn btn-warning" ng-click="editData(el)"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -28,7 +37,7 @@
 			<th>Nome</th>
 			<th colspan="2">Tipo</th>
 	 	</tr>
-	 	<tr ng-repeat="el1 in resource " ng-show="el1.assigned == project.id">
+	 	<tr ng-repeat="el1 in resource " ng-show="el1.assigned == project.id" class="active">
 	 		<td>{{ el1.surname }}</td>
 			<td>{{ el1.name }}</td>
 			<td>{{ el1.type}}</td>
@@ -38,10 +47,11 @@
 					ng-click=" rimuoviR(el1,0); updateDataP(project) "><span class="glyphicon glyphicon-minus"></span></button>
 	 			</div>
 	 		</td>
+
 	 	</tr>
 	</table>
 </div>
-
+<!--assegnazione risorse-->
 <div class="table-responsive col-md-6">
 	<h3>Assegna Risorse</h3>
 	<table class="table table-striped">
@@ -50,12 +60,17 @@
 			<th>Nome</th>
 			<th colspan="2">Tipo</th>
 	 	</tr>
-	 	<tr ng-repeat="el in resource " ng-show="el.assigned == 0">
+	 	<tr ng-repeat="el in resource " ng-show="el.assigned == 0" class="active">
 	 		<td>{{ el.surname }}</td><td>{{ el.name }}</td><td>{{ el.type}}</td>
 	 		<td>
-	 			<div class="btn-group">
+	 			<div class="btn-group"  ng-show="el.type=='Junior'&& project.nJ<project.njunior">
 					<button class="btn btn-success btn-circle" style=" width:21px;height:21px;padding: 0;border-radius:10px;"
-					ng-click="assegnaR(el,project.id); updateDataP(project) "><span class="glyphicon glyphicon-plus"></span></button>
+					ng-click="assegnaR(el,project.id); updateDataP(project)"><span class="glyphicon glyphicon-plus"></span></button>
+	 			</div>
+
+	 			<div class="btn-group" ng-show="el.type=='Senior'&& project.nS<project.nsenior">
+					<button class="btn btn-success btn-circle" style=" width:21px;height:21px;padding: 0;border-radius:10px;"
+					ng-click="assegnaR(el,project.id); updateDataP(project)"><span class="glyphicon glyphicon-plus"></span></button>
 	 			</div>
 	 		</td>
 	 	</tr>
