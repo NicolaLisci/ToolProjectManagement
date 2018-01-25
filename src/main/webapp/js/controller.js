@@ -35,6 +35,8 @@ angular.module('controller', [])
                 $scope.blogs = data;
                 $scope.frm = {};
                 $('#blogForm').slideToggle();
+                $timeout(function(){
+                  location.reload()}, 1000);
             })
             .error(function(err) {
                 $scope.notification.error = true;
@@ -64,6 +66,8 @@ angular.module('controller', [])
                 }, 3000);
                 $scope.blogs = data;
                 $scope.frm = $scope.editBlogData = {};
+                $timeout(function(){
+                  location.reload()}, 1000);
             })
             .error(function(err) {
                 $scope.notification.error = true;
